@@ -1,10 +1,4 @@
---[[
-    GD50
-    Pokemon
 
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
-]]
 
 TILE_IDS = {
     ['grass'] = {46, 47},

@@ -13,7 +13,37 @@ function BattleMenuState:init(battleState)
                 text = 'Fight'
             },
             {
-                text = 'Run'
+                text = 'Run',
+                onSelect = function()
+                    -- pop battle menu
+                    gStateStack:pop()
+
+                    -- show a message saying they successfully ran, then fade in
+                    -- and out back to the field automatically
+                    gStateStack:push(BattleMessageState('You fled successfully!',
+                        function() end), false)
+                    Timer.after(0.5, function()
+                        gStateStack:push(FadeInState({
+                            r = 1, g = 1, b = 1
+                        }, 1,
+                        
+                        -- pop message and battle state and add a fade to blend in the field
+                        function()
+
+                            -- pop message state
+                            gStateStack:pop()
+
+                            -- pop battle state
+                            gStateStack:pop()
+
+                            gStateStack:push(FadeOutState({
+                                r = 1, g = 1, b = 1
+                            }, 1, function()
+                                -- do nothing after fade out ends
+                            end))
+                        end))
+                    end)
+                end
             }
         }
     }
