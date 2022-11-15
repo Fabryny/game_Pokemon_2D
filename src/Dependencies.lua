@@ -22,6 +22,8 @@ require 'src/entity/Player'
 require 'src/gui/Textbox'
 require 'src/gui/Panel'
 require 'src/gui/ProgressBar'
+require 'src/gui/Menu'
+require 'src/gui/Selection'
 
 require 'src/states/BaseState'
 require 'src/states/StateStack'
@@ -40,6 +42,7 @@ require 'src/states/game/DialogueState'
 require 'src/states/game/PlayState'
 require 'src/states/game/BattleState'
 require 'src/states/game/BattleMessageState'
+require 'src/states/game/BattleMenuState'
 
 require 'src/pokemon_defs'
 
@@ -52,6 +55,7 @@ require 'src/world/TileMap'
 gTextures = {
     ['tiles'] = love.graphics.newImage('graphics/sheet.png'),
     ['entities'] = love.graphics.newImage('graphics/entities.png'),
+    ['cursor'] = love.graphics.newImage('graphics/cursor.png'),
 
     ['aardart-back'] = love.graphics.newImage('graphics/pokemon/aardart-back.png'),
     ['aardart-front'] = love.graphics.newImage('graphics/pokemon/aardart-front.png'),

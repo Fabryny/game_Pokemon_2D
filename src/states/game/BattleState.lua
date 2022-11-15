@@ -138,9 +138,9 @@ function BattleState:triggerStartingDialogue()
     
     -- callback for when the battle message is closed
     function()
-        gStateStack:push(BattleMessageState('Go, ' .. tostring(self.player.party.pokemon[1].name .. '!')
+        gStateStack:push(BattleMessageState('Go, ' .. tostring(self.player.party.pokemon[1].name .. '!'),
     
         -- push a battle menu onto the stack that has access to the battle state
-      ))
+        gStateStack:push(BattleMenuState(self))))
     end))
 end
