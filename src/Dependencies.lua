@@ -43,6 +43,7 @@ require 'src/states/game/PlayState'
 require 'src/states/game/BattleState'
 require 'src/states/game/BattleMessageState'
 require 'src/states/game/BattleMenuState'
+require 'src/states/game/TakeTurnState'
 
 require 'src/pokemon_defs'
 

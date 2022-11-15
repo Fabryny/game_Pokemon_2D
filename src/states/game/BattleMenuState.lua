@@ -10,7 +10,11 @@ function BattleMenuState:init(battleState)
         height = 64,
         items = {
             {
-                text = 'Fight'
+                text = 'Fight',
+                onSelect = function()
+                    gStateStack:pop()
+                    gStateStack:push(TakeTurnState(self.battleState))
+                end
             },
             {
                 text = 'Run',
