@@ -3,8 +3,24 @@ StartState = Class{__includes = BaseState}
 
 function StartState:init()
 
+    self.sprite = POKEMON_DEFS[POKEMON_IDS[math.random(#POKEMON_IDS)]].battleSpriteFront
+    self.spriteX = VIRTUAL_WIDTH / 2 - 32
+    self.spriteY = VIRTUAL_HEIGHT / 2 - 16
 
+    self.tween = Timer.every(3, function()
+        Timer.tween(0.2, {
+            [self] = {spriteX = -64}
+        })
+        :finish(function()
+            self.sprite = POKEMON_DEFS[POKEMON_IDS[math.random(#POKEMON_IDS)]].battleSpriteFront
+            self.spriteX = VIRTUAL_WIDTH
+            self.spriteY = VIRTUAL_HEIGHT / 2 - 16
 
+            Timer.tween(0.2, {
+                [self] = {spriteX = VIRTUAL_WIDTH / 2 - 32}
+            })
+        end)
+    end)
 
 end
 
@@ -26,4 +42,5 @@ function StartState:render()
     love.graphics.ellipse('fill', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 + 32, 72, 24)
 
     love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.draw(gTextures[self.sprite], self.spriteX, self.spriteY)
 end
