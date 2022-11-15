@@ -8,8 +8,13 @@ require 'src/constants'
 require 'src/StateMachine'
 require 'src/Party'
 require 'src/Util'
+require 'src/Pokemon'
 
 
+require 'src/battle/BattleSprite'
+require 'src/battle/Opponent'
+
+ 
 require 'src/entity/entity_defs'
 require 'src/entity/Entity'
 require 'src/entity/Player'
