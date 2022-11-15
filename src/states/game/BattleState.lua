@@ -70,6 +70,7 @@ function BattleState:enter(params)
 end
 
 function BattleState:exit()
+    gSounds['battle-music']:stop()
 end
 
 function BattleState:update(dt)

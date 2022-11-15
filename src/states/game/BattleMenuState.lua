@@ -19,6 +19,7 @@ function BattleMenuState:init(battleState)
             {
                 text = 'Run',
                 onSelect = function()
+                    gSounds['run']:play()
                     -- pop battle menu
                     gStateStack:pop()
 
@@ -34,6 +35,9 @@ function BattleMenuState:init(battleState)
                         -- pop message and battle state and add a fade to blend in the field
                         function()
 
+                            -- resume field music
+                            gSounds['field-music']:play()
+                            
                             -- pop message state
                             gStateStack:pop()
 

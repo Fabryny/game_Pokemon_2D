@@ -2,6 +2,7 @@
 StartState = Class{__includes = BaseState}
 
 function StartState:init()
+    gSounds['intro-music']:play()
 
     self.sprite = POKEMON_DEFS[POKEMON_IDS[math.random(#POKEMON_IDS)]].battleSpriteFront
     self.spriteX = VIRTUAL_WIDTH / 2 - 32
@@ -30,6 +31,7 @@ function StartState:update(dt)
             r = 1, g = 1, b = 1
         }, 1,
         function()
+            gSounds['intro-music']:stop()
             self.tween:remove()
 
             gStateStack:pop()

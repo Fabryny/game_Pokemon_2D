@@ -24,6 +24,10 @@ function PlayerWalkState:checkForEncounter()
         self.entity:changeState('idle')
 
         
+        gSounds['field-music']:pause()
+        gSounds['battle-music']:play()
+
+        
         -- first, push a fade in; when that's done, push a battle state and a fade
         -- out, which will fall back to the battle state once it pushes itself off
         gStateStack:push(

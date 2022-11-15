@@ -1,3 +1,10 @@
+--[[
+    GD50
+    Pokemon
+
+    Author: Colton Ogden
+    cogden@cs50.harvard.edu
+]]
 
 TakeTurnState = Class{__includes = BaseState}
 
@@ -72,6 +79,9 @@ function TakeTurnState:attack(attacker, defender, attackerSprite, defenderSprite
     -- pause for half a second, then play attack animation
     Timer.after(0.5, function()
         
+        -- attack sound
+        gSounds['powerup']:stop()
+        gSounds['powerup']:play()
 
         -- blink the attacker sprite three times (turn on and off blinking 6 times)
         Timer.every(0.1, function()
@@ -82,6 +92,8 @@ function TakeTurnState:attack(attacker, defender, attackerSprite, defenderSprite
             
             -- after finishing the blink, play a hit sound and flash the opacity of
             -- the defender a few times
+            gSounds['hit']:stop()
+            gSounds['hit']:play()
 
             Timer.every(0.1, function()
                 defenderSprite.opacity = defenderSprite.opacity == 64/255 and 1 or 64/255
@@ -138,6 +150,9 @@ function TakeTurnState:faint()
                 -- restore player pokemon to full health
                 self.playerPokemon.currentHP = self.playerPokemon.HP
 
+                -- resume field music
+                gSounds['battle-music']:stop()
+                gSounds['field-music']:play()
                 
                 -- pop off the battle state and back into the field
                 gStateStack:pop()
@@ -159,6 +174,10 @@ function TakeTurnState:victory()
     })
     :finish(function()
         -- play victory music
+        gSounds['battle-music']:stop()
+
+        gSounds['victory-music']:setLooping(true)
+        gSounds['victory-music']:play()
 
         -- when finished, push a victory message
         gStateStack:push(BattleMessageState('Victory!',
@@ -173,6 +192,7 @@ function TakeTurnState:victory()
                 function() end, false))
 
             Timer.after(1.5, function()
+                gSounds['exp']:play()
 
                 -- animate the exp filling up
                 Timer.tween(0.5, {
@@ -188,6 +208,7 @@ function TakeTurnState:victory()
                     -- level up if we've gone over the needed amount
                     if self.playerPokemon.currentExp > self.playerPokemon.expToLevel then
                         
+                        gSounds['levelup']:play()
 
                         -- set our exp to whatever the overlap is
                         self.playerPokemon.currentExp = self.playerPokemon.currentExp - self.playerPokemon.expToLevel
@@ -212,6 +233,11 @@ function TakeTurnState:fadeOutWhite()
         r = 1, g = 1, b = 1
     }, 1, 
     function()
+
+        -- resume field music
+        gSounds['victory-music']:stop()
+        gSounds['field-music']:play()
+        
         -- pop off the battle state
         gStateStack:pop()
         gStateStack:push(FadeOutState({
