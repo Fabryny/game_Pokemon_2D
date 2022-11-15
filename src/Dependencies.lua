@@ -6,13 +6,17 @@ Timer = require 'lib/knife.timer'
 require 'src/constants'
 require 'src/StateMachine'
 
+require 'src/gui/Textbox'
+require 'src/gui/Panel'
 
 require 'src/states/BaseState'
 require 'src/states/StateStack'
 
 
 require 'src/states/game/StartState'
-
+require 'src/states/game/FadeInState'
+require 'src/states/game/FadeOutState'
+require 'src/states/game/DialogueState'
 
 require 'src/pokemon_defs'
 
