@@ -32,6 +32,8 @@ require 'src/states/game/FadeInState'
 require 'src/states/game/FadeOutState'
 require 'src/states/game/DialogueState'
 require 'src/states/game/PlayState'
+require 'src/states/game/BattleState'
+require 'src/states/game/BattleMessageState'
 
 require 'src/pokemon_defs'
 

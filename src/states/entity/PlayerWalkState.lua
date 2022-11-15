@@ -32,8 +32,8 @@ function PlayerWalkState:checkForEncounter()
             }, 1, 
             
             -- callback that will execute once the fade in is complete
-            function()--[[ 
-                gStateStack:push(BattleState(self.entity)) ]]
+            function()
+                gStateStack:push(BattleState(self.entity))
                 gStateStack:push(FadeOutState({
                     r = 1, g = 1, b = 1,
                 }, 1,
