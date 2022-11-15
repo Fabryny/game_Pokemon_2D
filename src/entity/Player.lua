@@ -6,7 +6,7 @@ function Player:init(def)
 
     self.party = Party {
         pokemon = {
-            Pokemon(Pokemon.getRandomDef(), 6)
+            Pokemon(Pokemon.getRandomDef(), 5)
         }
     }
 end
