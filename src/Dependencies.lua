@@ -3,9 +3,16 @@ Event = require 'lib/knife.event'
 push = require 'lib/push'
 Timer = require 'lib/knife.timer'
 
+require 'src/Animation'
 require 'src/constants'
 require 'src/StateMachine'
+require 'src/Party'
 require 'src/Util'
+
+
+require 'src/entity/entity_defs'
+require 'src/entity/Entity'
+require 'src/entity/Player'
 
 require 'src/gui/Textbox'
 require 'src/gui/Panel'
@@ -13,6 +20,10 @@ require 'src/gui/Panel'
 require 'src/states/BaseState'
 require 'src/states/StateStack'
 
+
+require 'src/states/entity/EntityBaseState'
+require 'src/states/entity/EntityIdleState'
+require 'src/states/entity/PlayerIdleState'
 
 require 'src/states/game/StartState'
 require 'src/states/game/FadeInState'
@@ -30,6 +41,7 @@ require 'src/world/TileMap'
 
 gTextures = {
     ['tiles'] = love.graphics.newImage('graphics/sheet.png'),
+    ['entities'] = love.graphics.newImage('graphics/entities.png'),
 
     ['aardart-back'] = love.graphics.newImage('graphics/pokemon/aardart-back.png'),
     ['aardart-front'] = love.graphics.newImage('graphics/pokemon/aardart-front.png'),
@@ -45,6 +57,7 @@ gTextures = {
 
 gFrames = {
     ['tiles'] = GenerateQuads(gTextures['tiles'], 16, 16),
+    ['entities'] = GenerateQuads(gTextures['entities'], 16, 16)
 }
 
 gFonts = {
