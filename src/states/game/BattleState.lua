@@ -27,6 +27,38 @@ function BattleState:init(player)
     self.opponentSprite = BattleSprite(self.opponent.party.pokemon[1].battleSpriteFront, 
         VIRTUAL_WIDTH, 8)
 
+            -- health bars for pokemon
+    self.playerHealthBar = ProgressBar {
+        x = VIRTUAL_WIDTH - 160,
+        y = VIRTUAL_HEIGHT - 80,
+        width = 152,
+        height = 6,
+        color = {r = 189/255, g = 32/255, b = 32/255},
+        value = self.player.party.pokemon[1].currentHP,
+        max = self.player.party.pokemon[1].HP
+    }
+
+    self.opponentHealthBar = ProgressBar {
+        x = 8,
+        y = 8,
+        width = 152,
+        height = 6,
+        color = {r = 189/255, g = 32/255, b = 32/255},
+        value = self.opponent.party.pokemon[1].currentHP,
+        max = self.opponent.party.pokemon[1].HP
+    }
+
+    -- exp bar for player
+    self.playerExpBar = ProgressBar {
+        x = VIRTUAL_WIDTH - 160,
+        y = VIRTUAL_HEIGHT - 73,
+        width = 152,
+        height = 6,
+        color = {r = 32/255, g = 32/255, b = 189/255},
+        value = self.player.party.pokemon[1].currentExp,
+        max = self.player.party.pokemon[1].expToLevel
+    }
+
     
     -- circles underneath pokemon that will slide from sides at start
     self.playerCircleX = -68
@@ -62,7 +94,23 @@ function BattleState:render()
 
     love.graphics.setColor(1, 1, 1, 1)
     self.opponentSprite:render()
-    self.playerSprite:render()
+    self.playerSprite:render()    
+    
+    if self.renderHealthBars then
+        self.playerHealthBar:render()
+        self.opponentHealthBar:render()
+        self.playerExpBar:render()
+
+        -- render level text
+        love.graphics.setColor(0, 0, 0, 1)
+        love.graphics.setFont(gFonts['small'])
+        love.graphics.print('LV ' .. tostring(self.playerPokemon.level),
+            self.playerHealthBar.x, self.playerHealthBar.y - 10)
+        love.graphics.print('LV ' .. tostring(self.opponentPokemon.level),
+            self.opponentHealthBar.x, self.opponentHealthBar.y + 8)
+        love.graphics.setFont(gFonts['medium'])
+        love.graphics.setColor(1, 1, 1, 1)
+    end
 end
 
 function BattleState:triggerSlideIn()
@@ -76,6 +124,7 @@ function BattleState:triggerSlideIn()
     })
     :finish(function()
         self:triggerStartingDialogue()
+        self.renderHealthBars = true
     end)
 end
 

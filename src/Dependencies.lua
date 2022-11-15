@@ -21,6 +21,7 @@ require 'src/entity/Player'
 
 require 'src/gui/Textbox'
 require 'src/gui/Panel'
+require 'src/gui/ProgressBar'
 
 require 'src/states/BaseState'
 require 'src/states/StateStack'
