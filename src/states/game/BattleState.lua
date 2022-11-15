@@ -10,6 +10,7 @@ BattleState = Class{__includes = BaseState}
 
 function BattleState:init(player)
     self.player = player
+    self.bottomPanel = Panel(0, VIRTUAL_HEIGHT - 64, VIRTUAL_WIDTH, 64)
 
     -- flag for when the battle can take input, set in the first update call
     self.battleStarted = false
@@ -111,6 +112,7 @@ function BattleState:render()
         love.graphics.setFont(gFonts['medium'])
         love.graphics.setColor(1, 1, 1, 1)
     end
+    self.bottomPanel:render()
 end
 
 function BattleState:triggerSlideIn()
