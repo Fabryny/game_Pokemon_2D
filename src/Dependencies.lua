@@ -24,6 +24,8 @@ require 'src/states/StateStack'
 require 'src/states/entity/EntityBaseState'
 require 'src/states/entity/EntityIdleState'
 require 'src/states/entity/PlayerIdleState'
+require 'src/states/entity/EntityWalkState'
+require 'src/states/entity/PlayerWalkState'
 
 require 'src/states/game/StartState'
 require 'src/states/game/FadeInState'

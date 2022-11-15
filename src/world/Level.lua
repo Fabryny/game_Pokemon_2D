@@ -20,6 +20,7 @@ function Level:init()
     }
 
     self.player.stateMachine = StateMachine {
+        ['walk'] = function() return PlayerWalkState(self.player, self) end,
         ['idle'] = function() return PlayerIdleState(self.player) end
     }
     self.player.stateMachine:change('idle')
