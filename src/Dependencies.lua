@@ -5,6 +5,7 @@ Timer = require 'lib/knife.timer'
 
 require 'src/constants'
 require 'src/StateMachine'
+require 'src/Util'
 
 require 'src/gui/Textbox'
 require 'src/gui/Panel'
@@ -17,11 +18,18 @@ require 'src/states/game/StartState'
 require 'src/states/game/FadeInState'
 require 'src/states/game/FadeOutState'
 require 'src/states/game/DialogueState'
+require 'src/states/game/PlayState'
 
 require 'src/pokemon_defs'
 
+require 'src/world/Level'
+require 'src/world/tile_ids'
+require 'src/world/Tile'
+require 'src/world/TileMap'
+
 
 gTextures = {
+    ['tiles'] = love.graphics.newImage('graphics/sheet.png'),
 
     ['aardart-back'] = love.graphics.newImage('graphics/pokemon/aardart-back.png'),
     ['aardart-front'] = love.graphics.newImage('graphics/pokemon/aardart-front.png'),
@@ -33,6 +41,10 @@ gTextures = {
     ['bamboon-front'] = love.graphics.newImage('graphics/pokemon/bamboon-front.png'),
     ['cardiwing-back'] = love.graphics.newImage('graphics/pokemon/cardiwing-back.png'),
     ['cardiwing-front'] = love.graphics.newImage('graphics/pokemon/cardiwing-front.png'),
+}
+
+gFrames = {
+    ['tiles'] = GenerateQuads(gTextures['tiles'], 16, 16),
 }
 
 gFonts = {
